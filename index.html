@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeLip — Trishakti</title>
+
+<!-- AOS Animation Library for scroll animations -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<style>
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Inter", sans-serif; }
+body { background:#0c0012; color:white; overflow-x:hidden; scroll-behavior:smooth; }
+
+/* BACKGROUND */
+.bg-wrap { position:fixed; inset:0; background: radial-gradient(circle at 20% 20%, #2a093b, #100014 70%); overflow:hidden; z-index:-1; }
+.blob { position:absolute; width:600px; height:600px; filter:blur(150px); opacity:0.45; animation: float 12s infinite ease-in-out; }
+.blob1 { background:#00FFFF; top:-200px; left:-150px; }
+.blob2 { background:#00008B; bottom:-150px; right:-150px; animation-delay:-4s; }
+.blob3 { background:#000000; top:40%; left:50%; width:600px; height:600px; opacity:0.2; animation-duration:16s; }
+@keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,-40px) scale(1.15);} }
+
+/* NAVBAR */
+.navbar { width:100%; padding:20px 60px; display:flex; justify-content:space-between; align-items:center; position:fixed; top:0; z-index:99; backdrop-filter:blur(20px);}
+.nav-left { display:flex; align-items:center; gap:12px;}
+.logo { height:100px; width:auto; border-radius:6px; }
+.brand { font-size:80px; font-weight:700; letter-spacing:1px; }
+.nav-right a { color:white; text-decoration:none; font-size:20px; margin-left:35px; font-weight:500; transition:0.3s ease; cursor:pointer; }
+.nav-right a:hover { opacity:0.7; }
+.buy-btn { padding:10px 18px; background:#ff0066; border-radius:30px; font-weight:600; }
+
+/* HERO */
+.hero { margin-top:180px; padding:0 80px; display:flex; justify-content:space-between; align-items:center; height:90vh; }
+.hero-left { max-width:50%; }
+.hero-heading { font-size:130px; font-weight:800; background:linear-gradient(90deg,#c300ff,#ff007a,#ff66c4); -webkit-background-clip:text; color:transparent; animation:hueShift 5s infinite linear;}
+@keyframes hueShift { 0%{filter:hue-rotate(0deg);} 100%{filter:hue-rotate(360deg);} }
+.hero-subtitle { margin-top:15px; font-size:30px; line-height:1.5; opacity:0.8; }
+.know-more-btn { display:inline-block; margin-top:25px; padding:12px 25px; background:#FFFF00; color:white; text-decoration:none; font-weight:600; border-radius:30px; transition:0.3s; }
+.know-more-btn:hover { transform:scale(1.05); opacity:0.9; }
+.hero-right { position:relative; }
+.hero-product { position:relative; width:250px; z-index:2; }
+
+/* SECTIONS */
+.section { width:100%; padding:60px 8%; display:block; animation:fadeIn 0.6s ease; }
+@keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+.section h2 { font-size:40px; margin-bottom:20px; font-weight:700; text-align:center; }
+
+/* GRID CARDS */
+.grid { display:grid; grid-template-columns:repeat(4,1fr); gap:25px; margin-top:40px; }
+.card { padding:30px; background:#1a001f; border:2px solid #ff00c8; border-radius:15px; text-align:center; font-size:20px; transition:0.3s; }
+.card:hover { transform:translateY(-10px); background:#30002e; }
+
+/* BOXES */
+.box, .price-card { margin-top:30px; padding:30px; background:#1a001f; border-radius:15px; border:2px solid #ff00c8; font-size:20px; line-height:1.6; }
+.price-card { text-align:center; }
+.price-card h3 { font-size:35px; margin-bottom:10px; }
+.price { font-size:45px; margin:10px 0; background:linear-gradient(90deg,#ff00c8,#ff66f5); -webkit-background-clip:text; color:transparent; }
+.desc { font-size:20px; opacity:0.8; }
+.btn-main { margin-top:20px; padding:12px 30px; font-size:22px; background:#ff00c8; border:none; color:white; border-radius:30px; cursor:pointer; }
+.btn-main:hover { transform:scale(1.05); }
+
+/* VIDEO */
+.video-demo { width:70%; border-radius:25px; display:block; margin:0 auto; }
+
+/* FOOTER */
+.footer { padding:40px 20px; text-align:center; margin-top:60px; background:#0a000e; border-top:2px solid #3d003d; }
+.footer-title { font-size:28px; margin-bottom:10px; }
+.footer-text { font-size:18px; opacity:0.8; }
+
+/* HOW IT HELPS BULLETS */
+.help-list { margin-top:30px; list-style: none; font-size:22px; line-height:2; padding-left:0; }
+.help-list li::before { content:"✔"; color:#ff00c8; margin-right:10px; }
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-wrap">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="nav-left">
+        <img src="assets/logo.jpeg" class="logo">
+        <h1 class="brand">TRISHAKTI</h1>
+    </div>
+    <nav class="nav-right">
+        <a onclick="scrollToSection('features')">Features</a>
+        <a onclick="scrollToSection('about')">About Us</a>
+        <a onclick="scrollToSection('help')">How It Helps</a>
+        <a onclick="scrollToSection('pricing')">Pricing</a>
+        <a onclick="openForm()" class="buy-btn">Buy</a>
+        <a onclick="scrollToSection('contact')">Contact Us</a>
+    </nav>
+</header>
+
+<!-- HERO SECTION (removed Know More button) -->
+<section class="hero">
+    <div class="hero-left">
+        <h1 class="hero-heading">SafeLip</h1>
+        <p class="hero-subtitle">A discreet lipstick-shaped safety device with instant SOS, GPS/GSM, and an evidence camera.</p>
+<a onclick="scrollToSection('knowmore')" class="know-more-btn">Know More</a>
+
+    </div>
+    <div class="hero-right">
+        <img src="assets/safelip.jpeg" class="hero-product">
+    </div>
+</section>
+
+<!-- CONTACT FORM MODAL -->
+<div id="buyFormModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999;">
+    <div style="background:#1a001f; padding:40px; border-radius:20px; width:90%; max-width:500px; position:relative;">
+        <span onclick="closeForm()" style="position:absolute; top:10px; right:15px; font-size:28px; cursor:pointer;">&times;</span>
+        <h2 style="text-align:center; margin-bottom:20px;">Buy SafeLip</h2>
+        <form>
+            <input type="text" name="name" placeholder="Your Name" required style="width:100%; padding:12px; margin:10px 0; border-radius:10px; border:none;">
+            <input type="email" name="email" placeholder="Your Email" required style="width:100%; padding:12px; margin:10px 0; border-radius:10px; border:none;">
+            <input type="tel" name="phone" placeholder="Phone (optional)" style="width:100%; padding:12px; margin:10px 0; border-radius:10px; border:none;">
+            <textarea name="message" placeholder="Your Message" rows="5" style="width:100%; padding:12px; margin:10px 0; border-radius:10px; border:none;"></textarea>
+            <button type="submit" class="btn-main" style="width:100%;">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function openForm(){
+    document.getElementById('buyFormModal').style.display = 'flex';
+}
+function closeForm(){
+    document.getElementById('buyFormModal').style.display = 'none';
+}
+</script>
+
+<!-- FEATURES -->
+<section id="features" class="section" data-aos="fade-up">
+    <h2>Features</h2>
+    <div class="grid">
+        <div class="card">Instant SOS Trigger</div>
+        <div class="card">Hidden Evidence Camera</div>
+        <div class="card">Real-time GPS Tracking</div>
+        <div class="card">GSM Alerts to Guardians</div>
+        <div class="card">Lipstick-size Device</div>
+        <div class="card">Long Battery Backup</div>
+        <div class="card">Water & Dust Resistant</div>
+        <div class="card">Mobile App Integration</div>
+    </div>
+</section>
+<section id="knowmore" class="section" data-aos="fade-up">
+    <h2>Know More About SafeLip</h2>
+    <video class="video-demo" autoplay muted loop controls>
+        <source src="assets/demo-video.mp4" type="video/mp4">
+    </video>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section" data-aos="fade-up">
+    <h2>About Us</h2>
+    <div class="box">
+        <p>Trishakti SafeLip is a unique women safety innovation designed to protect users in emergencies. Our mission is to provide modern, hidden, and instant protection for every woman.</p>
+        <br>
+        <p>SafeLip is built by young innovators aiming to revolutionize personal safety with compact technology.</p>
+    </div>
+</section>
+
+<!-- HOW IT HELPS -->
+<section id="help" class="section" data-aos="fade-up">
+    <h2>How It Helps Users</h2>
+    <ul class="help-list">
+        <li>Gives instant SOS alerts</li>
+        <li>Sends GPS location to contacts</li>
+        <li>Records evidence discreetly</li>
+        <li>Can be used discreetly in emergencies</li>
+    </ul>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="section" data-aos="fade-up">
+    <h2>Pricing</h2>
+    <div class="price-card">
+        <h3>SafeLip Smart Device</h3>
+        <p class="price">₹1499</p>
+        <p class="desc">Includes SOS • GPS • GSM • Camera • App</p
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" data-aos="fade-up">
+    <h2>Contact Us</h2>
+    <div class="box">
+        <p><b>Email:</b> trishakti.innovations@gmail.com</p>
+        <p><b>Phone:</b> +91 98320 08010,+91 62957 08847</p>
+        <p><b>Location:</b> Siliguri, West Bengal, India</p>
+    </div>
+</section>
+
+<!-- KNOW MORE -->
+<section id="knowmore" class="section" data-aos="fade-up">
+    <h2>Know More About SafeLip</h2>
+    <video class="video-demo" autoplay muted loop controls>
+        <source src="assets/demo-video.mp4" type="video/mp4">
+    </video>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" data-aos="fade-up">
+    <h3 class="footer-title">Made With ❤️ In India</h3>
+    <p class="footer-text">© 2025 Trishakti SafeLip — All Rights Reserved.</p>
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({duration:1000, once:true});
+
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+</script>
+<script>
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
